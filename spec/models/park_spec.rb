@@ -11,4 +11,13 @@ RSpec.describe Park do
     it {should allow_value(true).for(:affluent)}
     it {should allow_value(false).for(:affluent)}
   end
+
+  describe 'instance methods' do
+    it 'has tree count' do
+      park = Park.create!(name: "Turtle Park", affluent: true, year: 1950)
+      expect(park.tree_count).to eq(0)
+      tree_1 = park.trees.create!(species: "Spruce", healthy: true, diameter: 32)
+      expect(park.tree_count).to eq(1)
+    end
+  end
 end
