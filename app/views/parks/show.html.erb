@@ -1,0 +1,7 @@
+<h1><%= @park.name %></h1>
+<p>Established: <%= @park.year %></p>
+<% if @park.affluent %>
+<p><%= 'Affluent'%></p>
+<% else %>
+<p><%= 'Not affluent'%></p>
+<% end %>
