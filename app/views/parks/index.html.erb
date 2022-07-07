@@ -1,8 +1,8 @@
 <h1>Parks</h1>
 
-<div id="parks">
-<% @parks.each do |park| %>
-<h3 class="parkname"><%= park.name %></h3>
+<% @parks.each_with_index do |park, index| %>
+<div id="park_<%= index%>">
+<h3><%= park.name %></h3>
 <p>Established: <%= park.year %></p>
 <% if park.affluent %>
 <p><%= 'Affluent'%></p>
@@ -10,5 +10,5 @@
 <p><%= 'Not affluent'%></p>
 <% end %>
 <p>Created: <%= park.created_at %></p>
+</div>
 <% end %>
-<div>
