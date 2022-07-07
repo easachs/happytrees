@@ -1,3 +1,3 @@
 class Tree < ApplicationRecord
-
+  belongs_to :park
 end

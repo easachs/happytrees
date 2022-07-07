@@ -2,5 +2,10 @@
 
 <% @trees.each do |tree| %>
 <h3><%= tree.species %></h3>
-<p>Diameter: <%= tree.diameter %></p>
+<p>Diameter: <%= tree.diameter %> in</p>
+<% if tree.healthy %>
+<p><%= 'Healthy'%></p>
+<% else %>
+<p><%= 'Unhealthy'%></p>
+<% end %>
 <% end %>
