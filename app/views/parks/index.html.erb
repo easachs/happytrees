@@ -3,4 +3,9 @@
 <% @parks.each do |park| %>
 <h3><%= park.name %></h3>
 <p>Established: <%= park.year %></p>
+<% if park.affluent %>
+<p><%= 'Affluent'%></p>
+<% else %>
+<p><%= 'Not affluent'%></p>
+<% end %>
 <% end %>
