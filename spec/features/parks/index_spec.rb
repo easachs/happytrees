@@ -45,4 +45,30 @@ RSpec.describe 'Park Index' do
     expect(page).to have_content("Created: #{park_1.created_at}")
     expect(page).to have_content("Created: #{park_2.created_at}")
   end
+
+  # User Story 8, Child Index Link
+
+  # As a visitor
+  # When I visit any page on the site
+  # Then I see a link at the top of the page that takes me to the Child Index
+
+  it 'has link to tree index' do
+    visit "/parks"
+    expect(page).to have_link('Trees Index')
+    click_link 'Trees Index'
+    expect(current_path).to eq("/trees")
+  end
+
+  # User Story 9, Parent Index Link
+
+  # As a visitor
+  # When I visit any page on the site
+  # Then I see a link at the top of the page that takes me to the Parent Index
+
+  it 'has link to park index' do
+    visit "/parks"
+    expect(page).to have_link('Parks Index')
+    click_link 'Parks Index'
+    expect(current_path).to eq("/parks")
+  end
 end
