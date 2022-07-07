@@ -1,3 +1,6 @@
+<p><%= link_to "Parks Index", "/parks" %> / <%= link_to "Trees Index", "/trees" %>
+ / <%= link_to "#{@park.name} Trees", "/parks/#{@park.id}/trees" %></p>
+
 <h1><%= @park.name %></h1>
 <p>Established: <%= @park.year %></p>
 <% if @park.affluent %>
