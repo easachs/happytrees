@@ -71,4 +71,18 @@ RSpec.describe 'Park Show' do
     click_link 'Parks Index'
     expect(current_path).to eq("/parks")
   end
+
+  # User Story 10, Parent Child Index Link
+
+  # As a visitor
+  # When I visit a parent show page ('/parents/:id')
+  # Then I see a link to take me to that parent's `child_table_name` page ('/parents/:id/child_table_name')
+
+  it 'has link to that parks tree index' do
+    park = Park.create!(name: "Turtle Park", affluent: true, year: 1950)
+    visit "/parks/#{park.id}"
+    expect(page).to have_link("#{park.name} Trees")
+    click_link "#{park.name} Trees"
+    expect(current_path).to eq("/parks/#{park.id}/trees")
+  end
 end
