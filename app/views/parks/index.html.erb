@@ -2,8 +2,9 @@
 
 <h1>Parks</h1>
 
+<div id="parks">
 <% @parks.each do |park| %>
-<h3><%= park.name %></h3>
+<h3 class="parkname"><%= park.name %></h3>
 <p>Established: <%= park.year %></p>
 <% if park.affluent %>
 <p><%= 'Affluent'%></p>
@@ -12,3 +13,4 @@
 <% end %>
 <p>Created: <%= park.created_at %></p>
 <% end %>
+<div>
