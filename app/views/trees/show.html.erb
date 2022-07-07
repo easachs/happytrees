@@ -1,0 +1,7 @@
+<h1><%= @tree.species %></h1>
+<p>Diameter: <%= @tree.diameter %> in</p>
+<% if @tree.healthy %>
+<p><%= 'Healthy'%></p>
+<% else %>
+<p><%= 'Unhealthy'%></p>
+<% end %>
