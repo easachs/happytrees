@@ -26,4 +26,21 @@ RSpec.describe 'Park Show' do
     expect(page).to have_content("Established: #{park_1.year}")
     expect(page).to have_content("Affluent")
   end
+
+  # User Story 7, Parent Child Count
+
+  # As a visitor
+  # When I visit a parent's show page
+  # I see a count of the number of children associated with this parent
+
+  it 'shows tree count' do
+    park_1 = Park.create!(name: "Turtle Park", affluent: true, year: 1950)
+    park_1.trees.create(species: "Spruce", healthy: true, diameter: 28)
+    park_1.trees.create(species: "Elm", healthy: true, diameter: 22)
+    park_1.trees.create(species: "Oak", healthy: false, diameter: 25)
+    visit "/parks/#{park_1.id}"
+
+    expect(page).to have_content("Tree Count: #{park_1.trees.count}")
+    expect(page).to have_content("Tree Count: 3")
+  end
 end
