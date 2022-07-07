@@ -5,6 +5,10 @@ class Park < ApplicationRecord
   validates :affluent, inclusion: [true, false]
 
   def tree_count
-    self.trees.count
+    trees.count
+  end
+
+  def self.sort_by_new
+    order(created_at: :desc)
   end
 end

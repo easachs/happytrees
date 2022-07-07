@@ -31,9 +31,12 @@ RSpec.describe 'Park Index' do
     park_3 = Park.create!(name: "Morse", affluent: false, year: 1960)
     visit "/parks"
 
-    within '#parks' do
-      expect(page.all('.parkname').first).to have_content(park_3.name)
-      expect(page.all('.parkname').last).to have_content(park_1.name)
+    within '#park_0' do
+      expect(page).to have_content(park_3.name)
+    end
+
+    within '#park_2' do
+      expect(page).to have_content(park_1.name)
     end
   end
 
