@@ -2,7 +2,11 @@ class ParkTreesController < ApplicationController
 
   def index
     @park = Park.find(params[:id])
-    @trees = @park.trees.show_healthy
+    if params[:sort] == "alpha"
+      @trees = @park.trees.alphabetical.show_healthy
+    else
+      @trees = @park.trees.show_healthy
+    end
   end
 
   def new

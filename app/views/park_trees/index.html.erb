@@ -1,8 +1,10 @@
-<%= link_to "Create Tree", "/parks/#{@park.id}/trees/new" %>
+<p><%= link_to "Create Tree", "/parks/#{@park.id}/trees/new" %></p>
+<p><%= link_to "Sort Alphabetically", "/parks/#{@park.id}/trees?sort=alpha"%></p>
 
 <h1><%= @park.name %></h1>
 
-<% @trees.each do |tree| %>
+<% @trees.each_with_index do |tree, index| %>
+  <div id="parktree_<%= index%>">
   <h3><%= tree.species %></h3>
   <p>Diameter: <%= tree.diameter %> in</p>
   <% if tree.healthy %>
@@ -10,4 +12,5 @@
   <% else %>
     <p><%= 'Unhealthy'%></p>
   <% end %>
+  </div>
 <% end %>
