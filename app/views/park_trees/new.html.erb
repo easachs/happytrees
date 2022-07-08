@@ -1,0 +1,11 @@
+<h1>Create new tree for <%= @park.name %></h1>
+
+<%= form_with url: "/parks/#{@park.id}/trees", method: :post, local: true do |form| %>
+  <p><%= form.label :species %>
+  <%= form.text_field :species %></p>
+  <p><%= form.label :diameter %>
+  <%= form.number_field :diameter %></p>
+  <p><%= form.label :healthy %>
+  <%= form.check_box :healthy %></p>
+  <p><%= form.submit 'Create Tree' %></p>
+<% end %> 
