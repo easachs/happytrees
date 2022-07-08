@@ -1,0 +1,11 @@
+<h1>Update tree</h1>
+
+<%= form_with url: "/trees/#{@tree.id}", method: :patch, local: true do |form| %>
+  <p><%= form.label :species %>
+  <%= form.text_field :species %></p>
+  <p><%= form.label :diameter %>
+  <%= form.number_field :diameter %></p>
+  <p><%= form.label :healthy %>
+  <%= form.check_box :healthy %></p>
+  <p><%= form.submit 'Update Tree' %></p>
+<% end %> 

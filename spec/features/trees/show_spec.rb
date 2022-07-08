@@ -58,4 +58,25 @@ RSpec.describe 'Tree Show' do
     click_link 'Parks Index'
     expect(current_path).to eq("/parks")
   end
+
+  # User Story 14, Child Update 
+
+  # As a visitor
+  # When I visit a Child Show page
+  # Then I see a link to update that Child "Update Child"
+  # When I click the link
+  # I am taken to '/child_table_name/:id/edit' where I see a form to edit the child's attributes:
+  # When I click the button to submit the form "Update Child"
+  # Then a `PATCH` request is sent to '/child_table_name/:id',
+  # the child's data is updated,
+  # and I am redirected to the Child Show page where I see the Child's updated information
+
+  it 'has link to update tree' do
+    park = Park.create!(name: "Turtle Park", affluent: true, year: 1950)
+    tree_1 = park.trees.create!(species: "Spruce", healthy: true, diameter: 32)
+    visit "/trees/#{tree_1.id}"
+    expect(page).to have_link('Update Tree')
+    click_link 'Update Tree'
+    expect(current_path).to eq("/trees/#{tree_1.id}/edit")
+  end
 end

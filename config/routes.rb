@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   post '/parks/:id/trees', to: 'park_trees#create'
   get '/trees', to: 'trees#index'
   get '/trees/:id', to: 'trees#show'
+  get '/trees/:id/edit', to: 'trees#edit'
+  patch '/trees/:id', to: 'trees#update'
 end
