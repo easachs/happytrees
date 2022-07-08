@@ -1,0 +1,11 @@
+<h1>Create new park</h1>
+
+<%= form_with url: "/parks", method: :post, local: true do |form| %>
+  <p><%= form.label :name %>
+  <%= form.text_field :name %></p>
+  <p><%= form.label :year %>
+  <%= form.text_field :year %></p>
+  <p><%= form.label :affluent %>
+  <%= form.check_box :affluent %></p>
+  <p><%= form.submit 'Create Park' %></p>
+<% end %>

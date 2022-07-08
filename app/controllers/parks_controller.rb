@@ -8,4 +8,16 @@ class ParksController < ApplicationController
     @park = Park.find(params[:id])
   end
 
+  def new
+  end
+
+  def create
+    Park.create(park_params)
+    redirect_to '/parks'
+  end
+
+  private
+  def park_params
+    params.permit(:name, :year, :affluent)
+  end
 end
