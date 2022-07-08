@@ -1,0 +1,11 @@
+<h1>Update park</h1>
+
+<%= form_with url: "/parks/#{@park.id}", method: :patch, local: true do |form| %>
+  <p><%= form.label :name %>
+  <%= form.text_field :name %></p>
+  <p><%= form.label :year %>
+  <%= form.number_field :year %></p>
+  <p><%= form.label :affluent %>
+  <%= form.check_box :affluent %></p>
+  <p><%= form.submit 'Update Park' %></p>
+<% end %>

@@ -1,11 +1,13 @@
+<%= link_to "Create Tree", "/parks/#{@park.id}/trees/new" %>
+
 <h1><%= @park.name %></h1>
 
 <% @trees.each do |tree| %>
-<h3><%= tree.species %></h3>
-<p>Diameter: <%= tree.diameter %> in</p>
-<% if tree.healthy %>
-<p><%= 'Healthy'%></p>
-<% else %>
-<p><%= 'Unhealthy'%></p>
-<% end %>
+  <h3><%= tree.species %></h3>
+  <p>Diameter: <%= tree.diameter %> in</p>
+  <% if tree.healthy %>
+    <p><%= 'Healthy'%></p>
+  <% else %>
+    <p><%= 'Unhealthy'%></p>
+  <% end %>
 <% end %>

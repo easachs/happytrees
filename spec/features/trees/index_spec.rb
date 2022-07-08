@@ -47,4 +47,24 @@ RSpec.describe 'Tree Index' do
     click_link 'Parks Index'
     expect(current_path).to eq("/parks")
   end
+
+  # User Story 15, Child Index only shows `true` Records 
+
+  # As a visitor
+  # When I visit the child index
+  # Then I only see records where the boolean column is `true`
+
+  it 'only displays healthy trees' do
+    park = Park.create!(name: "Turtle Park", affluent: true, year: 1950)
+    healthy_tree = park.trees.create!(species: "Spruce", healthy: true, diameter: 32)
+    unhealthy_tree = park.trees.create!(species: "Ash", healthy: false, diameter: 20)
+    visit "/trees"
+
+    expect(page).to have_content(healthy_tree.species)
+    expect(page).to have_content("Diameter: #{healthy_tree.diameter} in")
+    expect(page).to have_content("Healthy")
+    expect(page).to_not have_content(unhealthy_tree.species)
+    expect(page).to_not have_content("Diameter: #{unhealthy_tree.diameter} in")
+    expect(page).to_not have_content("Unhealthy")
+  end
 end
