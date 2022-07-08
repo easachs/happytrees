@@ -1,13 +1,11 @@
 <h1>Trees</h1>
 
-<% @trees.each do |tree| %>
+<% @trees.show_healthy.each do |tree| %>
+  <h3><%= tree.species %></h3>
+  <p>Diameter: <%= tree.diameter %> in</p>
   <% if tree.healthy %>
-    <h3><%= tree.species %></h3>
-    <p>Diameter: <%= tree.diameter %> in</p>
-    <% if tree.healthy %>
-      <p><%= 'Healthy'%></p>
-    <% else %>
-      <p><%= 'Unhealthy'%></p>
-    <% end %>
+    <p><%= 'Healthy'%></p>
+  <% else %>
+    <p><%= 'Unhealthy'%></p>
   <% end %>
 <% end %>
