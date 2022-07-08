@@ -3,14 +3,14 @@
 <h1>Parks</h1>
 
 <% @parks.each_with_index do |park, index| %>
-<div id="park_<%= index%>">
-<h3><%= park.name %></h3>
-<p>Established: <%= park.year %></p>
-<% if park.affluent %>
-<p><%= 'Affluent'%></p>
-<% else %>
-<p><%= 'Not affluent'%></p>
-<% end %>
-<p>Created: <%= park.created_at %></p>
-</div>
+  <div id="park_<%= index%>">
+  <h3><%= park.name %></h3>
+  <p>Established: <%= park.year %></p>
+  <% if park.affluent %>
+    <p><%= 'Affluent'%></p>
+  <% else %>
+    <p><%= 'Not affluent'%></p>
+  <% end %>
+  <p>Created: <%= park.created_at %></p>
+  </div>
 <% end %>
