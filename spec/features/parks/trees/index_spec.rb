@@ -141,4 +141,34 @@ RSpec.describe 'Park Trees Index' do
       expect(current_path).to eq("/trees/#{tree_2.id}/edit")
     end
   end
+
+  # User Story 21, Display Records Over a Given Threshold 
+
+  # As a visitor
+  # When I visit the Parent's children Index Page
+  # I see a form that allows me to input a number value
+  # When I input a number value and click the submit button that reads 'Only return records with more than `number` of `column_name`'
+  # Then I am brought back to the current index page with only the records that meet that threshold shown.
+
+  it 'has form and button to input number value' do
+    park = Park.create!(name: "Turtle", affluent: true, year: 1950)
+    tree_1 = park.trees.create!(species: "Spruce", healthy: true, diameter: 32)
+    tree_2 = park.trees.create!(species: "Elm", healthy: true, diameter: 28)
+    visit "/parks/#{park.id}/trees"
+
+    # fill_in "Diameter", with '28'
+    expect(page).to have_button('Return records with > X in Diameter')
+  end
+
+  xit 'can show only parks trees with diameter more than x' do
+    park = Park.create!(name: "Turtle", affluent: true, year: 1950)
+    tree_1 = park.trees.create!(species: "Spruce", healthy: true, diameter: 32)
+    tree_2 = park.trees.create!(species: "Elm", healthy: true, diameter: 28)
+    visit "/parks/#{park.id}/trees"
+    # fill_in "Diameter", with '28'
+    click_button 'Return records with > X in Diameter'
+    expect(page).to have_current_path("/parks/#{park.id}/trees/?diam=28")
+    expect(page).to have_content(tree_1.species)
+    expect(page).to_not have_content(tree_2.species)
+  end
 end
