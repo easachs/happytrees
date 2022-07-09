@@ -79,4 +79,33 @@ RSpec.describe 'Tree Show' do
     click_link 'Update Tree'
     expect(current_path).to eq("/trees/#{tree_1.id}/edit")
   end
+
+  # User Story 20, Child Delete 
+
+  # As a visitor
+  # When I visit a child show page
+  # Then I see a link to delete the child "Delete Child"
+  # When I click the link
+  # Then a 'DELETE' request is sent to '/child_table_name/:id',
+  # the child is deleted,
+  # and I am redirected to the child index page where I no longer see this child
+
+  it 'has link to delete tree' do
+    park = Park.create!(name: "Turtle Park", affluent: true, year: 1950)
+    tree = park.trees.create!(species: "Spruce", healthy: true, diameter: 32)
+    visit "/trees"
+
+    expect(page).to have_content("#{tree.species}")
+    expect(page).to have_content("#{tree.diameter}")
+
+    visit "/trees/#{tree.id}"
+
+    expect(page).to have_link('Delete Tree')
+
+    click_link 'Delete Tree'
+    expect(current_path).to eq("/trees")
+    
+    expect(page).to_not have_content("#{tree.species}")
+    expect(page).to_not have_content("#{tree.diameter}")
+  end
 end
