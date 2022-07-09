@@ -79,4 +79,66 @@ RSpec.describe 'Park Trees Index' do
     click_link 'Create Tree'
     expect(current_path).to eq("/parks/#{park.id}/trees/new")
   end
+
+  # User Story 16, Sort Parent's Children in Alphabetical Order by name 
+
+  # As a visitor
+  # When I visit the Parent's children Index Page
+  # Then I see a link to sort children in alphabetical order
+  # When I click on the link
+  # I'm taken back to the Parent's children Index Page where I see all of the parent's children in alphabetical order
+
+  it 'has link to sort trees alphabetically' do
+    park = Park.create!(name: "Turtle Park", affluent: true, year: 1950)
+    tree_1 = park.trees.create!(species: "Spruce", healthy: true, diameter: 32)
+    tree_2 = park.trees.create!(species: "Elm", healthy: true, diameter: 28)
+    visit "/parks/#{park.id}/trees"
+
+    within '#parktree_0' do
+      expect(page).to have_content(tree_1.species)
+    end
+
+    within '#parktree_1' do
+      expect(page).to have_content(tree_2.species)
+    end
+
+    expect(page).to have_link('Sort Alphabetically')
+    click_link 'Sort Alphabetically'
+    expect(page).to have_current_path("/parks/#{park.id}/trees?sort=alpha")
+
+    within '#parktree_0' do
+      expect(page).to have_content(tree_2.species)
+    end
+
+    within '#parktree_1' do
+      expect(page).to have_content(tree_1.species)
+    end
+  end
+
+  # User Story 18, Child Update From Childs Index Page 
+
+  # As a visitor
+  # When I visit the `child_table_name` index page or a parent `child_table_name` index page
+  # Next to every child, I see a link to edit that child's info
+  # When I click the link
+  # I should be taken to that `child_table_name` edit page where I can update its information just like in User Story 11
+
+  it 'has links to edit trees' do
+    park = Park.create!(name: "Turtle", affluent: true, year: 1950)
+    tree_1 = park.trees.create!(species: "Spruce", healthy: true, diameter: 32)
+    tree_2 = park.trees.create!(species: "Elm", healthy: true, diameter: 28)
+    visit "/parks/#{park.id}/trees"
+
+    within '#parktree_0' do
+      expect(page).to have_content("#{tree_1.species}")
+      expect(page).to have_link('Edit')
+    end
+
+    within '#parktree_1' do
+      expect(page).to have_content("#{tree_2.species}")
+      expect(page).to have_link('Edit')
+      click_link 'Edit'
+      expect(current_path).to eq("/trees/#{tree_2.id}/edit")
+    end
+  end
 end
