@@ -94,4 +94,31 @@ RSpec.describe 'Park Index' do
     click_link 'New Park'
     expect(current_path).to eq("/parks/new")
   end
+
+  # User Story 17, Parent Update From Parent Index Page 
+
+  # As a visitor
+  # When I visit the parent index page
+  # Next to every parent, I see a link to edit that parent's info
+  # When I click the link
+  # I should be taken to that parents edit page where I can update its information just like in User Story 4
+
+  it 'has links to edit parks' do
+    park_1 = Park.create!(name: "Turtle", affluent: true, year: 1950)
+    park_2 = Park.create!(name: "Holbrook", affluent: true, year: 1980)
+    visit "/parks"
+
+    within '#park_0' do
+      # most recent first
+      expect(page).to have_content("#{park_2.name}")
+      expect(page).to have_link('Edit')
+    end
+
+    within '#park_1' do
+      expect(page).to have_content("#{park_1.name}")
+      expect(page).to have_link('Edit')
+      click_link 'Edit'
+      expect(current_path).to eq("/parks/#{park_1.id}/edit")
+    end
+  end
 end

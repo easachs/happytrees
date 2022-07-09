@@ -4,7 +4,7 @@
 
 <% @parks.each_with_index do |park, index| %>
   <div id="park_<%= index%>">
-  <h3><%= park.name %></h3>
+  <h3><%= park.name %> <%= link_to "Edit", "/parks/#{park.id}/edit" %></h3>
   <p>Established: <%= park.year %></p>
   <% if park.affluent %>
     <p><%= 'Affluent'%></p>
