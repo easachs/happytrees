@@ -1,5 +1,4 @@
 <p><%= link_to "#{@park.name} Trees", "/parks/#{@park.id}/trees" %></p>
-<p><%= link_to "Update Park", "/parks/#{@park.id}/edit" %></p>
 
 <h1><%= @park.name %></h1>
 <p>Established: <%= @park.year %></p>
@@ -9,3 +8,6 @@
   <p><%= 'Not affluent'%></p>
 <% end %>
 <p>Tree Count: <%= @park.tree_count %>
+
+<p><%= link_to "Update Park", "/parks/#{@park.id}/edit" %>
+ / <%= link_to 'Delete Park', "/parks/#{@park.id}", method: :delete%></p>
