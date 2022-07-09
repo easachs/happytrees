@@ -19,6 +19,11 @@ class TreesController < ApplicationController
     redirect_to "/trees/#{tree.id}"
   end
 
+  def destroy
+    Tree.destroy(params[:id])
+    redirect_to '/trees'
+  end
+
   private
   def tree_params
     params.permit(:species, :diameter, :healthy)
