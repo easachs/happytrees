@@ -3,9 +3,9 @@ class ParkTreesController < ApplicationController
   def index
     @park = Park.find(params[:id])
     if params[:sort] == "alpha"
-      @trees = @park.trees.alphabetical.show_healthy
+      @trees = @park.trees.alphabetical
     else
-      @trees = @park.trees.show_healthy
+      @trees = @park.trees
     end
   end
 
