@@ -1,7 +1,11 @@
 class ParksController < ApplicationController
 
   def index
-    @parks = Park.sort_by_new
+    if params[:sort] == "treecount"
+      @parks = Park.sort_by_treecount
+    else
+      @parks = Park.sort_by_new
+    end
   end
 
   def show
