@@ -11,4 +11,8 @@ class Tree < ApplicationRecord
   def self.alphabetical
     order(:species)
   end
+
+  def self.diam(diameter)
+    where('diameter > ?', diameter)
+  end
 end

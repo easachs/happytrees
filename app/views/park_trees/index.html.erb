@@ -2,9 +2,15 @@
 
 <h1><%= @park.name %></h1>
 
+<p><%= form_with url: "/parks/#{@park.id}/trees?diam=#{:diam}", method: :get, local: true, skip_enforcing_utf8: true do |form| %>
+  <p><%= form.label :diam %>
+  <%= form.number_field :diam %></p>
+  <p><%= form.submit "Return records with > X in Diameter", name: nil %></p>
+<% end %></p>
+
 <% @trees.each_with_index do |tree, index| %>
   <div id="parktree_<%= index%>">
-  <h3><%= tree.species %> <%= link_to "Edit", "/trees/#{tree.id}/edit" %></h3>
+  <h3><%= tree.species %> <%= link_to "Edit", "/trees/#{tree.id}/edit" %> / <%= link_to "Delete", "/trees/#{tree.id}", method: :delete %></h3>
   <p>Diameter: <%= tree.diameter %> in</p>
   <% if tree.healthy %>
     <p><%= 'Healthy'%></p>

@@ -4,6 +4,8 @@ class ParkTreesController < ApplicationController
     @park = Park.find(params[:id])
     if params[:sort] == "alpha"
       @trees = @park.trees.alphabetical
+    elsif params[:diam]
+      @trees = @park.trees.diam(params[:diam])
     else
       @trees = @park.trees
     end
