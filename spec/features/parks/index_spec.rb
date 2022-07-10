@@ -121,4 +121,34 @@ RSpec.describe 'Park Index' do
       expect(current_path).to eq("/parks/#{park_1.id}/edit")
     end
   end
+
+  # User Story 22, Parent Delete From Parent Index Page 
+
+  # As a visitor
+  # When I visit the parent index page
+  # Next to every parent, I see a link to delete that parent
+  # When I click the link
+  # I am returned to the Parent Index Page where I no longer see that parent
+
+  it 'has link to delete next to each park' do
+    park_1 = Park.create!(name: "Turtle", affluent: true, year: 1950)
+    park_2 = Park.create!(name: "Holbrook", affluent: true, year: 1980)
+    visit "/parks"
+
+    within '#park_0' do
+      # most recent first
+      expect(page).to have_content("#{park_2.name}")
+      expect(page).to have_link('Delete')
+    end
+
+    within '#park_1' do
+      expect(page).to have_content("#{park_1.name}")
+      expect(page).to have_link('Delete')
+      click_link 'Delete'
+    end
+
+    expect(current_path).to eq("/parks")
+    expect(page).to have_content("#{park_2.name}")
+    expect(page).to_not have_content("#{park_1.name}")
+  end
 end

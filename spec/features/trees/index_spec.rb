@@ -94,4 +94,34 @@ RSpec.describe 'Tree Index' do
       expect(current_path).to eq("/trees/#{tree_2.id}/edit")
     end
   end
+
+  # User Story 23, Child Delete From Childs Index Page 
+
+  # As a visitor
+  # When I visit the `child_table_name` index page or a parent `child_table_name` index page
+  # Next to every child, I see a link to delete that child
+  # When I click the link
+  # I should be taken to the `child_table_name` index page where I no longer see that child
+
+  it 'has link to delete next to each tree' do
+    park = Park.create!(name: "Turtle", affluent: true, year: 1950)
+    tree_1 = park.trees.create!(species: "Spruce", healthy: true, diameter: 32)
+    tree_2 = park.trees.create!(species: "Elm", healthy: true, diameter: 28)
+    visit "/trees"
+
+    within '#tree_0' do
+      expect(page).to have_content("#{tree_1.species}")
+      expect(page).to have_link('Delete')
+    end
+
+    within '#tree_1' do
+      expect(page).to have_content("#{tree_2.species}")
+      expect(page).to have_link('Delete')
+      click_link 'Delete'
+    end
+
+    expect(current_path).to eq("/trees")
+    expect(page).to have_content("#{tree_1.species}")
+    expect(page).to_not have_content("#{tree_2.species}")
+  end
 end
