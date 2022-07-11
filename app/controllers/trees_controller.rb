@@ -1,7 +1,7 @@
 class TreesController < ApplicationController
 
   def index
-    @trees = Tree.all
+    @trees = Tree.show_healthy
   end
 
   def show
