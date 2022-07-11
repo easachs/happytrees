@@ -4,7 +4,9 @@
 
 <% @parks.each_with_index do |park, index| %>
   <div id="park_<%= index%>">
-  <h3><%= park.name %> <%= link_to "Edit", "/parks/#{park.id}/edit" %> / <%= link_to "Delete", "/parks/#{park.id}", method: :delete %></h3>
+  <h3><span style="text-align: left;"><%= link_to "#{park.name}", "/parks/#{park.id}" %></span>
+  <span style="float: right;"><%= link_to "Edit", "/parks/#{park.id}/edit" %> / 
+  <%= link_to "Delete", "/parks/#{park.id}", method: :delete %></span></h3>
   <p>Established: <%= park.year %></p>
   <% if park.affluent %>
     <p><%= 'Affluent'%></p>
@@ -14,3 +16,5 @@
   <p>Created: <%= park.created_at %></p>
   </div>
 <% end %>
+
+<p><%= link_to "Sort By Tree Count", "/parks?sort=treecount"%></p>

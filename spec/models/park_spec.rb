@@ -32,5 +32,19 @@ RSpec.describe Park do
       expect(Park.sort_by_new.first.id).to eq(park_3.id)
       expect(Park.sort_by_new.last.id).to eq(park_1.id)
     end
+
+    it 'order parks by tree count (high to low)' do
+      park_1 = Park.create!(name: "Turtle", affluent: true, year: 1950)
+      park_2 = Park.create!(name: "Holbrook", affluent: true, year: 1980)
+      tree_1 = park_2.trees.create!(species: "Spruce", healthy: true, diameter: 32)
+      tree_2 = park_2.trees.create!(species: "Elm", healthy: true, diameter: 28)
+      park_3 = Park.create!(name: "Morse", affluent: false, year: 1960)
+      tree_3 = park_3.trees.create!(species: "Elm", healthy: true, diameter: 28)
+
+      expect(Park.all.first.id).to eq(park_1.id)
+      expect(Park.all.last.id).to eq(park_3.id)
+      expect(Park.sort_by_treecount.first.id).to eq(park_2.id)
+      expect(Park.sort_by_treecount.last.id).to eq(park_1.id)
+    end
   end
 end

@@ -151,4 +151,64 @@ RSpec.describe 'Park Index' do
     expect(page).to have_content("#{park_2.name}")
     expect(page).to_not have_content("#{park_1.name}")
   end
+
+  # Sort Parents by Number of Children 
+
+  # As a visitor
+  # When I visit the Parents Index Page
+  # Then I see a link to sort parents by the number of `child_table_name` they have
+  # When I click on the link
+  # I'm taken back to the Parent Index Page where I see all of the parents in order of their count of `child_table_name` (highest to lowest) And, I see the number of children next to each parent name
+
+  it 'can sort parks by tree count' do
+    park_1 = Park.create!(name: "Turtle", affluent: true, year: 1950)
+    park_2 = Park.create!(name: "Holbrook", affluent: true, year: 1980)
+    tree_1 = park_2.trees.create!(species: "Spruce", healthy: true, diameter: 32)
+    tree_2 = park_2.trees.create!(species: "Elm", healthy: true, diameter: 28)
+    park_3 = Park.create!(name: "Morse", affluent: false, year: 1960)
+    tree_3 = park_3.trees.create!(species: "Elm", healthy: true, diameter: 28)
+    visit "/parks"
+
+    # most recent first
+    within '#park_0' do
+      expect(page).to have_content(park_3.name)
+    end
+
+    within '#park_2' do
+      expect(page).to have_content(park_1.name)
+    end
+
+    expect(page).to have_link('Sort By Tree Count')
+    click_link 'Sort By Tree Count'
+    expect(page).to have_current_path("/parks?sort=treecount")
+
+    within '#park_0' do
+      expect(page).to have_content(park_2.name)
+    end
+
+    within '#park_1' do
+      expect(page).to have_content(park_3.name)
+    end
+
+    within '#park_2' do
+      expect(page).to have_content(park_1.name)
+    end
+  end
+
+  it 'has links to each park show page' do
+    park_1 = Park.create!(name: "Turtle", affluent: true, year: 1950)
+    park_2 = Park.create!(name: "Holbrook", affluent: true, year: 1980)
+    visit "/parks"
+
+    within '#park_0' do
+      # most recent first
+      expect(page).to have_link("#{park_2.name}")
+    end
+
+    within '#park_1' do
+      expect(page).to have_link("#{park_1.name}")
+      click_link "#{park_1.name}"
+      expect(current_path).to eq("/parks/#{park_1.id}")
+    end
+  end
 end
