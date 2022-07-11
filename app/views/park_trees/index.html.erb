@@ -10,9 +10,9 @@
 
 <% @trees.each_with_index do |tree, index| %>
   <div id="parktree_<%= index%>">
-  <h3><%= link_to "#{tree.species}", "/trees/#{tree.id}" %> / 
-  <%= link_to "Edit", "/trees/#{tree.id}/edit" %> / 
-  <%= link_to "Delete", "/trees/#{tree.id}", method: :delete %></h3>
+  <h3><span style="text-align: left;"><%= link_to "#{tree.species}", "/trees/#{tree.id}" %></span>
+  <span style="float: right;"><%= link_to "Edit", "/trees/#{tree.id}/edit" %> / 
+  <%= link_to "Delete", "/trees/#{tree.id}", method: :delete %></span></h3>
   <p>Diameter: <%= tree.diameter %> in</p>
   <% if tree.healthy %>
     <p><%= 'Healthy'%></p>
