@@ -81,8 +81,8 @@ RSpec.describe 'Park Show' do
   it 'has link to that parks tree index' do
     park = Park.create!(name: "Turtle Park", affluent: true, year: 1950)
     visit "/parks/#{park.id}"
-    expect(page).to have_link("#{park.name} Trees")
-    click_link "#{park.name} Trees"
+    expect(page).to have_link("#{park.name} Trees Index")
+    click_link "#{park.name} Trees Index"
     expect(current_path).to eq("/parks/#{park.id}/trees")
   end
 

@@ -157,7 +157,7 @@ RSpec.describe 'Park Trees Index' do
     visit "/parks/#{park.id}/trees"
 
     fill_in 'Diam', with: '28'
-    expect(page).to have_button('Return records with > X in Diameter')
+    expect(page).to have_button('Only Trees > X in Diameter')
   end
 
   it 'can show only parks trees with diameter more than x' do
@@ -166,7 +166,7 @@ RSpec.describe 'Park Trees Index' do
     tree_2 = park.trees.create!(species: "Elm", healthy: true, diameter: 28)
     visit "/parks/#{park.id}/trees"
     fill_in 'Diam', with: '28'
-    click_button 'Return records with > X in Diameter'
+    click_button 'Only Trees > X in Diameter'
     expect(page).to have_current_path("/parks/#{park.id}/trees?diam=28")
     expect(page).to have_content(tree_1.species)
     expect(page).to_not have_content(tree_2.species)
