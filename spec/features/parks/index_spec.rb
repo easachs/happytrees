@@ -194,4 +194,21 @@ RSpec.describe 'Park Index' do
       expect(page).to have_content(park_1.name)
     end
   end
+
+  it 'has links to each park show page' do
+    park_1 = Park.create!(name: "Turtle", affluent: true, year: 1950)
+    park_2 = Park.create!(name: "Holbrook", affluent: true, year: 1980)
+    visit "/parks"
+
+    within '#park_0' do
+      # most recent first
+      expect(page).to have_link("#{park_2.name}")
+    end
+
+    within '#park_1' do
+      expect(page).to have_link("#{park_1.name}")
+      click_link "#{park_1.name}"
+      expect(current_path).to eq("/parks/#{park_1.id}")
+    end
+  end
 end

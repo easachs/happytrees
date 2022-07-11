@@ -201,4 +201,21 @@ RSpec.describe 'Park Trees Index' do
     expect(page).to have_content("#{tree_1.species}")
     expect(page).to_not have_content("#{tree_2.species}")
   end
+
+  it 'has links to each tree show page' do
+    park = Park.create!(name: "Turtle", affluent: true, year: 1950)
+    tree_1 = park.trees.create!(species: "Spruce", healthy: true, diameter: 32)
+    tree_2 = park.trees.create!(species: "Elm", healthy: true, diameter: 28)
+    visit "/parks/#{park.id}/trees"
+
+    within '#parktree_0' do
+      expect(page).to have_link("#{tree_1.species}")
+    end
+
+    within '#parktree_1' do
+      expect(page).to have_link("#{tree_2.species}")
+      click_link "#{tree_2.species}"
+      expect(current_path).to eq("/trees/#{tree_2.id}")
+    end
+  end
 end
