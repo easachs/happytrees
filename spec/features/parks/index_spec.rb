@@ -235,4 +235,28 @@ RSpec.describe 'Park Index' do
     expect(page).to_not have_content(park_2.name)
     expect(page).to_not have_content(park_3.name)
   end
+
+  # Search by name (partial match)
+
+  # As a visitor
+  # When I visit an index page ('/parents') or ('/child_table_name')
+  # Then I see a text box to filter results by keyword
+  # When I type in a keyword that is an partial match of one or more of my records and press the Search button
+  # Then I only see records that are an partial match returned on the page
+
+  it 'has search textbox and can search by partial name' do
+    park_1 = Park.create!(name: "Turtle", affluent: true, year: 1950)
+    park_2 = Park.create!(name: "Holbrook", affluent: true, year: 1980)
+    park_3 = Park.create!(name: "Moore", affluent: false, year: 1960)
+    visit "/parks"
+
+    fill_in 'Partial search', with: 'oo'
+    expect(page).to have_button('Partial Search')
+    click_button 'Partial Search'
+
+    expect(page).to have_current_path("/parks?partial_search=oo")
+    expect(page).to have_content(park_2.name)
+    expect(page).to have_content(park_3.name)
+    expect(page).to_not have_content(park_1.name)
+  end
 end
