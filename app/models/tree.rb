@@ -15,4 +15,12 @@ class Tree < ApplicationRecord
   def self.diam(diameter)
     where('diameter > ?', diameter)
   end
+
+  def self.exact_search(search)
+    where('species = ?', search)
+  end
+
+  def self.partial_search(search)
+    where('species Like ?', "%#{search}%")
+  end
 end

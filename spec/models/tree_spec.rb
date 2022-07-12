@@ -43,5 +43,27 @@ RSpec.describe Tree do
       expect(Tree.diam(28).length).to eq(1)
       expect(Tree.diam(30).last.id).to eq(tree_1.id)
     end
+
+    it 'can search by name (exact match)'  do
+      park = Park.create!(name: "Turtle", affluent: true, year: 1950)
+      tree_1 = park.trees.create!(species: "Spruce", healthy: true, diameter: 32)
+      tree_2 = park.trees.create!(species: "Elm", healthy: true, diameter: 28)
+      tree_3 = park.trees.create!(species: "Spruce", healthy: false, diameter: 22)
+
+      expect(Tree.exact_search("Spruce").length).to eq(2)
+      expect(Tree.exact_search("Elm").length).to eq(1)
+      expect(Tree.exact_search("Elm").first.id).to eq(tree_2.id)
+    end
+
+    it 'can search by name (partial match)'  do
+      park = Park.create!(name: "Turtle", affluent: true, year: 1950)
+      tree_1 = park.trees.create!(species: "Spruce", healthy: true, diameter: 32)
+      tree_2 = park.trees.create!(species: "Elm", healthy: true, diameter: 28)
+      tree_3 = park.trees.create!(species: "Spruce", healthy: false, diameter: 22)
+
+      expect(Tree.partial_search("pru").length).to eq(2)
+      expect(Tree.partial_search("pru").first.id).to eq(tree_1.id)
+      expect(Tree.partial_search("pru").last.id).to eq(tree_3.id)
+    end
   end
 end

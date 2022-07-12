@@ -46,5 +46,26 @@ RSpec.describe Park do
       expect(Park.sort_by_treecount.first.id).to eq(park_2.id)
       expect(Park.sort_by_treecount.last.id).to eq(park_1.id)
     end
+
+    it 'can search by name (exact match)'  do
+      park_1 = Park.create!(name: "Turtle", affluent: true, year: 1950)
+      park_2 = Park.create!(name: "Holbrook", affluent: true, year: 1980)
+      park_3 = Park.create!(name: "Morse", affluent: false, year: 1960)
+
+      expect(Park.all.first.id).to eq(park_1.id)
+      expect(Park.all.last.id).to eq(park_3.id)
+      expect(Park.exact_search("Turtle").first.id).to eq(park_1.id)
+      expect(Park.exact_search("Turtle").length).to eq(1)
+    end
+
+    it 'can search by name (partial match)'  do
+      park_1 = Park.create!(name: "Turtle", affluent: true, year: 1950)
+      park_2 = Park.create!(name: "Holbrook", affluent: true, year: 1980)
+      park_3 = Park.create!(name: "Moore", affluent: false, year: 1960)
+
+      expect(Park.partial_search("oo").length).to eq(2)
+      expect(Park.partial_search("oo").first.id).to eq(park_2.id)
+      expect(Park.partial_search("oo").last.id).to eq(park_3.id)
+    end
   end
 end

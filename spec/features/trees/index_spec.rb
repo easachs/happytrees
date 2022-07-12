@@ -141,4 +141,56 @@ RSpec.describe 'Tree Index' do
       expect(current_path).to eq("/trees/#{tree_2.id}")
     end
   end
+
+  # Search by name (exact match)
+
+  # As a visitor
+  # When I visit an index page ('/parents') or ('/child_table_name')
+  # Then I see a text box to filter results by keyword
+  # When I type in a keyword that is an exact match of one or more of my records and press the Search button
+  # Then I only see records that are an exact match returned on the page
+
+  it 'has search textbox and can search by exact name' do
+    park = Park.create!(name: "Turtle", affluent: true, year: 1950)
+    tree_1 = park.trees.create!(species: "Spruce", healthy: true, diameter: 32)
+    tree_2 = park.trees.create!(species: "Elm", healthy: true, diameter: 28)
+    tree_3 = park.trees.create!(species: "Spruce", healthy: false, diameter: 22)
+    visit "/trees"
+
+    fill_in 'Exact search', with: 'Spruce'
+    expect(page).to have_button('Exact Search')
+    click_button 'Exact Search'
+
+    expect(page).to have_current_path("/trees?exact_search=Spruce")
+    expect(page).to have_content(tree_1.species)
+    expect(page).to_not have_content(tree_2.species)
+    expect(page).to have_content(tree_1.diameter)
+    expect(page).to have_content(tree_3.diameter)
+  end
+
+  # Search by name (partial match)
+
+  # As a visitor
+  # When I visit an index page ('/parents') or ('/child_table_name')
+  # Then I see a text box to filter results by keyword
+  # When I type in a keyword that is an partial match of one or more of my records and press the Search button
+  # Then I only see records that are an partial match returned on the page
+
+  it 'has search textbox and can search by partial name' do
+    park = Park.create!(name: "Turtle", affluent: true, year: 1950)
+    tree_1 = park.trees.create!(species: "Spruce", healthy: true, diameter: 32)
+    tree_2 = park.trees.create!(species: "Elm", healthy: true, diameter: 28)
+    tree_3 = park.trees.create!(species: "Spruce", healthy: false, diameter: 22)
+    visit "/trees"
+
+    fill_in 'Partial search', with: 'pru'
+    expect(page).to have_button('Partial Search')
+    click_button 'Partial Search'
+
+    expect(page).to have_current_path("/trees?partial_search=pru")
+    expect(page).to have_content(tree_1.species)
+    expect(page).to_not have_content(tree_2.species)
+    expect(page).to have_content(tree_1.diameter)
+    expect(page).to have_content(tree_3.diameter)
+  end
 end

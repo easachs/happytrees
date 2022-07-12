@@ -5,7 +5,7 @@
 <p><%= form_with url: "/parks/#{@park.id}/trees?diam=#{:diam}", method: :get, local: true, skip_enforcing_utf8: true do |form| %>
   <p><%= form.label :diam %>
   <%= form.number_field :diam %></p>
-  <p><%= form.submit "Return records with > X in Diameter", name: nil %></p>
+  <p><%= form.submit "Only Trees > X in Diameter", name: nil %></p>
 <% end %></p>
 
 <% @trees.each_with_index do |tree, index| %>
