@@ -13,6 +13,11 @@ RSpec.describe Park do
   end
 
   describe 'instance methods' do
+    it 'can format created at' do
+      park = Park.create!(name: "Turtle Park", affluent: true, year: 1950)
+      expect(park.format_created).to eq(park.created_at.strftime("%m/%d/%Y at %-l:%M%P"))
+    end
+
     it 'has tree count' do
       park = Park.create!(name: "Turtle Park", affluent: true, year: 1950)
       expect(park.tree_count).to eq(0)

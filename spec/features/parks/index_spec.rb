@@ -45,8 +45,8 @@ RSpec.describe 'Park Index' do
     park_2 = Park.create!(name: "Holbrook", affluent: true, year: 1980)
     visit "/parks"
 
-    expect(page).to have_content("Created: #{park_1.created_at}")
-    expect(page).to have_content("Created: #{park_2.created_at}")
+    expect(page).to have_content("Created: #{park_1.format_created}")
+    expect(page).to have_content("Created: #{park_2.format_created}")
   end
 
   # User Story 8, Child Index Link

@@ -4,6 +4,10 @@ class Park < ApplicationRecord
   validates_presence_of :year
   validates :affluent, inclusion: [true, false]
 
+  def format_created
+    created_at.strftime("%m/%d/%Y at %-l:%M%P")
+  end
+  
   def tree_count
     trees.count
   end
