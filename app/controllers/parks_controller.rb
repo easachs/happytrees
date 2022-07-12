@@ -5,6 +5,8 @@ class ParksController < ApplicationController
       @parks = Park.sort_by_treecount
     elsif params[:exact_search]
       @parks = Park.exact_search(params[:exact_search])
+    elsif params[:partial_search]
+      @parks = Park.partial_search(params[:partial_search])
     else
       @parks = Park.sort_by_new
     end

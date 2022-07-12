@@ -19,4 +19,8 @@ class Park < ApplicationRecord
   def self.exact_search(search)
     where('name = ?', search)
   end
+
+  def self.partial_search(search)
+    where('name Like ?', "%#{search}%")
+  end
 end

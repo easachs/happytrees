@@ -3,6 +3,8 @@ class TreesController < ApplicationController
   def index
     if params[:exact_search]
       @trees = Tree.exact_search(params[:exact_search])
+    elsif params[:partial_search]
+      @trees = Tree.partial_search(params[:partial_search])
     else
       @trees = Tree.show_healthy
     end

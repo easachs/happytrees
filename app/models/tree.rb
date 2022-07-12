@@ -19,4 +19,8 @@ class Tree < ApplicationRecord
   def self.exact_search(search)
     where('species = ?', search)
   end
+
+  def self.partial_search(search)
+    where('species Like ?', "%#{search}%")
+  end
 end
