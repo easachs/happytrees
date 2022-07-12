@@ -3,6 +3,8 @@ class ParksController < ApplicationController
   def index
     if params[:sort] == "treecount"
       @parks = Park.sort_by_treecount
+    elsif params[:exact_search]
+      @parks = Park.exact_search(params[:exact_search])
     else
       @parks = Park.sort_by_new
     end

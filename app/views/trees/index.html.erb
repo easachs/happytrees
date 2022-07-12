@@ -1,5 +1,11 @@
 <h1>Trees</h1>
 
+<p><%= form_with url: "/trees?exact_search=#{:exact_search}", method: :get, local: true, skip_enforcing_utf8: true do |form| %>
+  <p><%= form.label :exact_search %>
+  <%= form.text_field :exact_search %>
+  <%= form.submit "Exact Search", name: nil %></p>
+<% end %></p>
+
 <% @trees.each_with_index do |tree, index| %>
   <div id="tree_<%= index%>">
   <h3><span style="text-align: left;"><%= link_to "#{tree.species}", "/trees/#{tree.id}" %></span>

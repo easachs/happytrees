@@ -1,7 +1,11 @@
 class TreesController < ApplicationController
 
   def index
-    @trees = Tree.show_healthy
+    if params[:exact_search]
+      @trees = Tree.exact_search(params[:exact_search])
+    else
+      @trees = Tree.show_healthy
+    end
   end
 
   def show
