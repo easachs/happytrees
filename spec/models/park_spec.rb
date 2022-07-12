@@ -50,6 +50,7 @@ RSpec.describe Park do
       expect(Park.all.last.id).to eq(park_3.id)
       expect(Park.sort_by_treecount.first.id).to eq(park_2.id)
       expect(Park.sort_by_treecount.last.id).to eq(park_1.id)
+      expect(Park.sort_by_treecount.length).to eq(3)
     end
 
     it 'can search by name (exact match)'  do

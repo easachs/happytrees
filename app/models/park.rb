@@ -17,7 +17,9 @@ class Park < ApplicationRecord
   end
 
   def self.sort_by_treecount
-    left_joins(:trees).group(:id).order(Arel.sql('count(trees.id) desc'))
+    left_joins(:trees)
+    .group(:id)
+    .order(Arel.sql('count(trees.id) desc'))
   end
 
   def self.exact_search(search)
