@@ -133,6 +133,8 @@ RSpec.describe 'Park Index' do
   it 'has link to delete next to each park' do
     park_1 = Park.create!(name: "Turtle", affluent: true, year: 1950)
     park_2 = Park.create!(name: "Holbrook", affluent: true, year: 1980)
+    # can delete park with dependents/children
+    tree = park_2.trees.create!(species: "Spruce", healthy: true, diameter: 32)
     visit "/parks"
 
     within '#park_0' do
