@@ -4,6 +4,10 @@ class Park < ApplicationRecord
   validates_presence_of :year
   validates :affluent, inclusion: [true, false]
 
+  def format_created
+    created_at.strftime("%m/%d/%Y at %-l:%M%P")
+  end
+  
   def tree_count
     trees.count
   end
@@ -13,7 +17,9 @@ class Park < ApplicationRecord
   end
 
   def self.sort_by_treecount
-    left_joins(:trees).group(:id).order(Arel.sql('count(trees.id) desc'))
+    left_joins(:trees)
+    .group(:id)
+    .order(Arel.sql('count(trees.id) desc'))
   end
 
   def self.exact_search(search)

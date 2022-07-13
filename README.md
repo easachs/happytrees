@@ -1,24 +1,28 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Project Requirements
 
-Things you may want to cover:
+* Rails version 5.2.8
 
-* Ruby version
+* Ruby version 2.7.4
 
-* System dependencies
+* PostgreSQL
 
-* Configuration
+* Handrolled routes
 
-* Database creation
+* All User Stories completed
 
-* Database initialization
+* Utilize ActiveRecord
 
-* How to run the test suite
+* TDD w/within blocks
 
-* Services (job queues, cache servers, search engines, etc.)
+* Full SimpleCov coverage
 
-* Deployment instructions
+## Schema: One to Many
 
-* ...
+* Parent: Park
+
+* Child: Tree
+
+![Schema](app/assets/images/readme/p1-schema.png)
+

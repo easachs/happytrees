@@ -2,9 +2,9 @@
 
 <%= form_with url: "/parks/#{@park.id}", method: :patch, local: true do |form| %>
   <p><%= form.label :name %>
-  <%= form.text_field :name %></p>
+  <%= form.text_field :name, placeholder: "#{@park.name}" %></p>
   <p><%= form.label :year %>
-  <%= form.number_field :year %></p>
+  <%= form.number_field :year, placeholder: "#{@park.year}" %></p>
   <p><%= form.label :affluent %>
   <%= form.check_box :affluent %></p>
   <p><%= form.submit 'Update Park' %></p>

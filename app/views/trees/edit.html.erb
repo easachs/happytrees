@@ -2,9 +2,9 @@
 
 <%= form_with url: "/trees/#{@tree.id}", method: :patch, local: true do |form| %>
   <p><%= form.label :species %>
-  <%= form.text_field :species %></p>
+  <%= form.text_field :species, placeholder: "#{@tree.species}" %></p>
   <p><%= form.label :diameter %>
-  <%= form.number_field :diameter %></p>
+  <%= form.number_field :diameter, placeholder: "#{@tree.diameter}" %></p>
   <p><%= form.label :healthy %>
   <%= form.check_box :healthy %></p>
   <p><%= form.submit 'Update Tree' %></p>
