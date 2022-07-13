@@ -1,5 +1,5 @@
 class Park < ApplicationRecord
-  has_many :trees
+  has_many :trees, dependent: :delete_all
   validates_presence_of :name
   validates_presence_of :year
   validates :affluent, inclusion: [true, false]

@@ -119,6 +119,8 @@ RSpec.describe 'Park Show' do
 
   it 'has link to delete park' do
     park = Park.create!(name: "Turtle Park", affluent: true, year: 1950)
+    # can delete park with dependents/children
+    tree = park.trees.create!(species: "Spruce", healthy: true, diameter: 32)
     visit "/parks"
 
     expect(page).to have_content("#{park.name}")
