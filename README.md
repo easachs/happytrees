@@ -33,7 +33,13 @@
 
 ## Stack
 
-Ruby 2.7.4, Rails 5.2.8, PostgreSQL, ActiveRecord, RSpec w/SimpleCov, BCrypt, Rubocop
+* Ruby 2.7.4
+* Rails 5.2.8
+* PostgreSQL
+* ActiveRecord
+* RSpec w/SimpleCov
+* BCrypt
+* Rubocop
 
 ## Schema
 
