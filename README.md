@@ -1,28 +1,53 @@
 # README
 
-## Project Requirements
+## Features
 
-* Rails version 5.2.8
+### User register/login
+* Validates email/password
 
-* Ruby version 2.7.4
+### Parks Index
+* Preset: Sort by Created At
+* Sort by Tree Count
+* Exact/Partial search
 
-* PostgreSQL
+### Parks Show
+* Park Tree Count/attributes
+* Park Tree Index link
 
-* Handrolled routes
+### Trees Index
+* Preset: Show Healthy
+* Exact/Partial search
 
-* All User Stories completed
+### Park's Tree Index
+* Sort Alphabetically
+* Only > X Diameter
 
-* Utilize ActiveRecord
+### Trees Show
+* Tree's attributes
 
-* TDD w/within blocks
+### Other Features:
+* CRUD functionality
+* Edit field placeholders
+* Links for easy navigation
+* And more...
 
-* Full SimpleCov coverage
+## Stack
 
-## Schema: One to Many
+Ruby 2.7.4, Rails 5.2.8, PostgreSQL, ActiveRecord, RSpec w/SimpleCov, BCrypt, Rubocop
 
-* Parent: Park
+## Schema
 
-* Child: Tree
+One park has many trees
 
-![Schema](app/assets/images/readme/p1-schema.png)
+### Parks
+* ID
+* Name
+* Affluent?
+* Year
 
+### Trees
+* ID
+* Park ID
+* Species
+* Healthy?
+* Diameter
