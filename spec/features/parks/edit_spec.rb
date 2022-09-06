@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Edit Park' do
-
-  # User Story 12, Parent Update 
+  # User Story 12, Parent Update
 
   # As a visitor
   # When I visit a parent show page
@@ -16,7 +17,7 @@ RSpec.describe 'Edit Park' do
   # and I am redirected to the Parent's Show page where I see the parent's updated info
 
   it 'can update park' do
-    park = Park.create!(name: "Turtle Park", affluent: false, year: 1950)
+    park = Park.create!(name: 'Turtle Park', affluent: false, year: 1950)
     visit "/parks/#{park.id}/edit"
     fill_in 'Name', with: 'Sloans Lake'
     fill_in 'Year', with: '1940'

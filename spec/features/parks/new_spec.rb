@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Create Park' do
-  
-  # User Story 11, Parent Creation 
+  # User Story 11, Parent Creation
 
   # As a visitor
   # When I visit the Parent Index page
@@ -16,15 +17,15 @@ RSpec.describe 'Create Park' do
   # and I am redirected to the Parent Index page where I see the new Parent displayed.
 
   it 'can create new park' do
-    visit "/parks/new"
+    visit '/parks/new'
     fill_in 'Name', with: 'Sloans Lake'
     fill_in 'Year', with: '1940'
     check 'Affluent'
     click_button 'Create Park'
 
-    expect(current_path).to eq("/parks")
+    expect(current_path).to eq('/parks')
 
-    within '#park_0' do
+    within '#park0' do
       expect(page).to have_content('Sloans Lake')
       expect(page).to have_content('1940')
       expect(page).to have_content('Affluent')

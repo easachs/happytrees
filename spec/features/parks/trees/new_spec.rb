@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Create Tree' do
-
-  # User Story 13, Parent Child Creation 
+  # User Story 13, Parent Child Creation
 
   # As a visitor
   # When I visit a Parent Childs Index page
@@ -16,7 +17,7 @@ RSpec.describe 'Create Tree' do
   # and I am redirected to the Parent Childs Index page where I can see the new child listed
 
   it 'can create new park tree' do
-    park = Park.create!(name: "Turtle Park", affluent: true, year: 1950)
+    park = Park.create!(name: 'Turtle Park', affluent: true, year: 1950)
     visit "/parks/#{park.id}/trees/new"
     fill_in 'Species', with: 'Siberian Elm'
     fill_in 'Diameter', with: '40'
@@ -28,4 +29,4 @@ RSpec.describe 'Create Tree' do
     expect(page).to have_content('40')
     expect(page).to have_content('Healthy')
   end
-end 
+end

@@ -1,14 +1,15 @@
-class ParkTreesController < ApplicationController
+# frozen_string_literal: true
 
+class ParkTreesController < ApplicationController
   def index
     @park = Park.find(params[:id])
-    if params[:sort] == "alpha"
-      @trees = @park.trees.alphabetical
-    elsif params[:diam]
-      @trees = @park.trees.diam(params[:diam])
-    else
-      @trees = @park.trees
-    end
+    @trees = if params[:sort] == 'alpha'
+               @park.trees.alphabetical
+             elsif params[:diam]
+               @park.trees.diam(params[:diam])
+             else
+               @park.trees
+             end
   end
 
   def new
@@ -22,8 +23,8 @@ class ParkTreesController < ApplicationController
   end
 
   private
+
   def tree_params
     params.permit(:species, :diameter, :healthy)
   end
-
 end

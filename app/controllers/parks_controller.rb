@@ -1,23 +1,23 @@
-class ParksController < ApplicationController
+# frozen_string_literal: true
 
+class ParksController < ApplicationController
   def index
-    if params[:sort] == "treecount"
-      @parks = Park.sort_by_treecount
-    elsif params[:exact_search]
-      @parks = Park.exact_search(params[:exact_search])
-    elsif params[:partial_search]
-      @parks = Park.partial_search(params[:partial_search])
-    else
-      @parks = Park.sort_by_new
-    end
+    @parks = if params[:sort] == 'treecount'
+               Park.sort_by_treecount
+             elsif params[:exact_search]
+               Park.exact_search(params[:exact_search])
+             elsif params[:partial_search]
+               Park.partial_search(params[:partial_search])
+             else
+               Park.sort_by_new
+             end
   end
 
   def show
     @park = Park.find(params[:id])
   end
 
-  def new
-  end
+  def new; end
 
   def create
     Park.create(park_params)
@@ -41,6 +41,7 @@ class ParksController < ApplicationController
   end
 
   private
+
   def park_params
     params.permit(:name, :year, :affluent)
   end

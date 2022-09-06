@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Edit Tree' do
-
-  # User Story 14, Child Update 
+  # User Story 14, Child Update
 
   # As a visitor
   # When I visit a Child Show page
@@ -15,14 +16,14 @@ RSpec.describe 'Edit Tree' do
   # and I am redirected to the Child Show page where I see the Child's updated information
 
   it 'can update tree' do
-    park = Park.create!(name: "Turtle Park", affluent: false, year: 1950)
-    tree_1 = park.trees.create!(species: "Spruce", healthy: true, diameter: 32)
-    visit "/trees/#{tree_1.id}/edit"
+    park = Park.create!(name: 'Turtle Park', affluent: false, year: 1950)
+    tree1 = park.trees.create!(species: 'Spruce', healthy: true, diameter: 32)
+    visit "/trees/#{tree1.id}/edit"
     fill_in 'Species', with: 'Catalpa'
     fill_in 'Diameter', with: '30'
     click_button 'Update Tree'
 
-    expect(current_path).to eq("/trees/#{tree_1.id}")
+    expect(current_path).to eq("/trees/#{tree1.id}")
     expect(page).to have_content('Catalpa')
     expect(page).to have_content('30')
     expect(page).to have_content('Unhealthy')
