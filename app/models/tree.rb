@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Tree < ApplicationRecord
   belongs_to :park
   validates_presence_of :species

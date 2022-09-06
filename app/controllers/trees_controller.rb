@@ -1,13 +1,14 @@
-class TreesController < ApplicationController
+# frozen_string_literal: true
 
+class TreesController < ApplicationController
   def index
-    if params[:exact_search]
-      @trees = Tree.exact_search(params[:exact_search])
-    elsif params[:partial_search]
-      @trees = Tree.partial_search(params[:partial_search])
-    else
-      @trees = Tree.show_healthy
-    end
+    @trees = if params[:exact_search]
+               Tree.exact_search(params[:exact_search])
+             elsif params[:partial_search]
+               Tree.partial_search(params[:partial_search])
+             else
+               Tree.show_healthy
+             end
   end
 
   def show
@@ -31,6 +32,7 @@ class TreesController < ApplicationController
   end
 
   private
+
   def tree_params
     params.permit(:species, :diameter, :healthy)
   end

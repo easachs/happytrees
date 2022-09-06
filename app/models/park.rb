@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Park < ApplicationRecord
   has_many :trees, dependent: :delete_all
   validates_presence_of :name
@@ -5,9 +7,9 @@ class Park < ApplicationRecord
   validates :affluent, inclusion: [true, false]
 
   def format_created
-    created_at.strftime("%m/%d/%Y at %-l:%M%P")
+    created_at.strftime('%m/%d/%Y at %-l:%M%P')
   end
-  
+
   def tree_count
     trees.count
   end
@@ -18,8 +20,8 @@ class Park < ApplicationRecord
 
   def self.sort_by_treecount
     left_joins(:trees)
-    .group(:id)
-    .order(Arel.sql('count(trees.id) desc'))
+      .group(:id)
+      .order(Arel.sql('count(trees.id) desc'))
   end
 
   def self.exact_search(search)
