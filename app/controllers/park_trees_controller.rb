@@ -2,7 +2,7 @@
 
 class ParkTreesController < ApplicationController
   def index
-    @park = Park.find(params[:id])
+    @park = Park.find(params[:park_id])
     @trees = if params[:sort] == 'alpha'
                @park.trees.alphabetical
              elsif params[:diam]
@@ -13,11 +13,11 @@ class ParkTreesController < ApplicationController
   end
 
   def new
-    @park = Park.find(params[:id])
+    @park = Park.find(params[:park_id])
   end
 
   def create
-    @park = Park.find(params[:id])
+    @park = Park.find(params[:park_id])
     @park.trees.create(tree_params)
     redirect_to "/parks/#{@park.id}/trees"
   end
