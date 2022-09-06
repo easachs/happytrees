@@ -28,7 +28,7 @@ RSpec.describe 'User registration' do
     expect(User.last.password_digest).to_not eq(password)
   end
 
-  it 'creates new user sad paths' do
+  it 'creates new user sad paths with error messages' do
     visit '/register'
 
     username = 'eli'
@@ -43,7 +43,7 @@ RSpec.describe 'User registration' do
     click_on 'Create User'
 
     expect(current_path).to eq('/register')
-    expect(page).to have_content('Invalid. Please try again.')
+    expect(page).to have_content("Username can't be blank")
 
     # no email
     fill_in :user_username, with: username
@@ -53,7 +53,7 @@ RSpec.describe 'User registration' do
     click_on 'Create User'
 
     expect(current_path).to eq('/register')
-    expect(page).to have_content('Invalid. Please try again.')
+    expect(page).to have_content("Email can't be blank")
 
     # no password
     fill_in :user_username, with: username
@@ -63,7 +63,7 @@ RSpec.describe 'User registration' do
     click_on 'Create User'
 
     expect(current_path).to eq('/register')
-    expect(page).to have_content('Invalid. Please try again.')
+    expect(page).to have_content("Password can't be blank")
 
     # no confirmation
     fill_in :user_username, with: username
@@ -73,7 +73,7 @@ RSpec.describe 'User registration' do
     click_on 'Create User'
 
     expect(current_path).to eq('/register')
-    expect(page).to have_content('Invalid. Please try again.')
+    expect(page).to have_content("Password confirmation can't be blank, Password confirmation doesn't match Password")
 
     # different password/confirmation
     fill_in :user_username, with: username
@@ -84,6 +84,6 @@ RSpec.describe 'User registration' do
     click_on 'Create User'
 
     expect(current_path).to eq('/register')
-    expect(page).to have_content('Invalid. Please try again.')
+    expect(page).to have_content("Password confirmation doesn't match Password")
   end
 end
