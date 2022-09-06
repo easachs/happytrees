@@ -25,7 +25,7 @@ RSpec.describe 'Login' do
   end
 
   it 'cant login with bad credentials' do
-    user = User.create!(username: 'eli', email: 'e@mail.com', password: 'test123', password_confirmation: 'test123')
+    User.create!(username: 'eli', email: 'e@mail.com', password: 'test123', password_confirmation: 'test123')
 
     visit login_path
 

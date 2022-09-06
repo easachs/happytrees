@@ -18,7 +18,7 @@ RSpec.describe Tree do
     it 'only shows healthy trees' do
       park = Park.create!(name: 'Turtle Park', affluent: true, year: 1950)
       tree1 = park.trees.create!(species: 'Spruce', healthy: true, diameter: 32)
-      tree2 = park.trees.create!(species: 'Elm', healthy: false, diameter: 28)
+      park.trees.create!(species: 'Elm', healthy: false, diameter: 28)
 
       expect(Tree.all.length).to eq(2)
       expect(Tree.show_healthy.length).to eq(1)
@@ -39,7 +39,7 @@ RSpec.describe Tree do
     it 'only shows tree above certain diameter' do
       park = Park.create!(name: 'Turtle Park', affluent: true, year: 1950)
       tree1 = park.trees.create!(species: 'Spruce', healthy: true, diameter: 32)
-      tree2 = park.trees.create!(species: 'Elm', healthy: true, diameter: 28)
+      park.trees.create!(species: 'Elm', healthy: true, diameter: 28)
 
       expect(Tree.all.length).to eq(2)
       expect(Tree.diam(28).length).to eq(1)
@@ -48,9 +48,9 @@ RSpec.describe Tree do
 
     it 'can search by name (exact match)' do
       park = Park.create!(name: 'Turtle', affluent: true, year: 1950)
-      tree1 = park.trees.create!(species: 'Spruce', healthy: true, diameter: 32)
+      park.trees.create!(species: 'Spruce', healthy: true, diameter: 32)
       tree2 = park.trees.create!(species: 'Elm', healthy: true, diameter: 28)
-      tree3 = park.trees.create!(species: 'Spruce', healthy: false, diameter: 22)
+      park.trees.create!(species: 'Spruce', healthy: false, diameter: 22)
 
       expect(Tree.exact_search('Spruce').length).to eq(2)
       expect(Tree.exact_search('Elm').length).to eq(1)
@@ -60,7 +60,7 @@ RSpec.describe Tree do
     it 'can search by name (partial match)' do
       park = Park.create!(name: 'Turtle', affluent: true, year: 1950)
       tree1 = park.trees.create!(species: 'Spruce', healthy: true, diameter: 32)
-      tree2 = park.trees.create!(species: 'Elm', healthy: true, diameter: 28)
+      park.trees.create!(species: 'Elm', healthy: true, diameter: 28)
       tree3 = park.trees.create!(species: 'Spruce', healthy: false, diameter: 22)
 
       expect(Tree.partial_search('pru').length).to eq(2)

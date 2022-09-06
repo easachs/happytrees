@@ -13,7 +13,7 @@
     <% flash.each do |name, msg| %>
       <%= content_tag :div, msg, class: name %>
     <% end %>
-    <p><%= link_to "Parks Index", "/parks" %> / <%= link_to "Trees Index", "/trees" %></p>
+    <p><%= link_to "Home", root_path %> / <%= link_to "Parks Index", parks_path %> / <%= link_to "Trees Index", trees_path %></p>
     <%= yield %>
   </body>
 </html>

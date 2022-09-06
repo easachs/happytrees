@@ -23,7 +23,7 @@ RSpec.describe Park do
     it 'has tree count' do
       park = Park.create!(name: 'Turtle Park', affluent: true, year: 1950)
       expect(park.tree_count).to eq(0)
-      tree1 = park.trees.create!(species: 'Spruce', healthy: true, diameter: 32)
+      park.trees.create!(species: 'Spruce', healthy: true, diameter: 32)
       expect(park.tree_count).to eq(1)
     end
   end
@@ -31,7 +31,7 @@ RSpec.describe Park do
   describe 'class methods' do
     it 'orders parks by most recent first' do
       park1 = Park.create!(name: 'Turtle', affluent: true, year: 1950)
-      park2 = Park.create!(name: 'Holbrook', affluent: true, year: 1980)
+      Park.create!(name: 'Holbrook', affluent: true, year: 1980)
       park3 = Park.create!(name: 'Morse', affluent: false, year: 1960)
 
       expect(Park.all.first.id).to eq(park1.id)
@@ -43,10 +43,10 @@ RSpec.describe Park do
     it 'order parks by tree count (high to low)' do
       park1 = Park.create!(name: 'Turtle', affluent: true, year: 1950)
       park2 = Park.create!(name: 'Holbrook', affluent: true, year: 1980)
-      tree1 = park2.trees.create!(species: 'Spruce', healthy: true, diameter: 32)
-      tree2 = park2.trees.create!(species: 'Elm', healthy: true, diameter: 28)
+      park2.trees.create!(species: 'Spruce', healthy: true, diameter: 32)
+      park2.trees.create!(species: 'Elm', healthy: true, diameter: 28)
       park3 = Park.create!(name: 'Morse', affluent: false, year: 1960)
-      tree3 = park3.trees.create!(species: 'Elm', healthy: true, diameter: 28)
+      park3.trees.create!(species: 'Elm', healthy: true, diameter: 28)
 
       expect(Park.all.first.id).to eq(park1.id)
       expect(Park.all.last.id).to eq(park3.id)
@@ -57,7 +57,7 @@ RSpec.describe Park do
 
     it 'can search by name (exact match)' do
       park1 = Park.create!(name: 'Turtle', affluent: true, year: 1950)
-      park2 = Park.create!(name: 'Holbrook', affluent: true, year: 1980)
+      Park.create!(name: 'Holbrook', affluent: true, year: 1980)
       park3 = Park.create!(name: 'Morse', affluent: false, year: 1960)
 
       expect(Park.all.first.id).to eq(park1.id)
@@ -67,7 +67,7 @@ RSpec.describe Park do
     end
 
     it 'can search by name (partial match)' do
-      park1 = Park.create!(name: 'Turtle', affluent: true, year: 1950)
+      Park.create!(name: 'Turtle', affluent: true, year: 1950)
       park2 = Park.create!(name: 'Holbrook', affluent: true, year: 1980)
       park3 = Park.create!(name: 'Moore', affluent: false, year: 1960)
 
