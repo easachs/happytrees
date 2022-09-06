@@ -10,11 +10,16 @@ class UsersController < ApplicationController
   end
 
   def create
-    user_params[:username] = user_params[:username].downcase
-    user_params[:email] = user_params[:email].downcase
-    new_user = User.create(user_params)
-    flash[:success] = "Welcome, #{new_user.username}!"
-    redirect_to user_path(new_user)
+    # user_params[:username] = user_params[:username].downcase
+    # user_params[:email] = user_params[:email].downcase
+    user = User.new(user_params)
+    if user.save
+      flash[:success] = "Welcome, #{user.username}!"
+      redirect_to user_path(user)
+    else
+      flash[:error] = 'Invalid. Please try again.'
+      redirect_to '/register'
+    end
   end
 
   private
