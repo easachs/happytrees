@@ -4,11 +4,12 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get '/register', to: 'users#new'
-  get '/login', to: 'users#login_form'
-  post '/login', to: 'users#login_user'
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
 
-  resources :users, only: %i[show create]
-
+  resources :users, only: %i[create]
+  
   resources :parks do
     resources :trees, only: %i[index new create], controller: 'park_trees'
   end

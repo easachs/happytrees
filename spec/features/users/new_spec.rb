@@ -21,6 +21,7 @@ RSpec.describe 'User registration' do
 
     click_on 'Create User'
 
+    expect(current_path).to eq(root_path)
     expect(page).to have_content("Welcome, #{username}!")
     expect(User.last.username).to eq('eli')
     expect(User.last.email).to eq('e@mail.com')
@@ -29,7 +30,7 @@ RSpec.describe 'User registration' do
   end
 
   it 'creates new user sad paths with error messages' do
-    visit '/register'
+    visit register_path
 
     username = 'eli'
     email = 'e@mail.com'
@@ -42,7 +43,7 @@ RSpec.describe 'User registration' do
 
     click_on 'Create User'
 
-    expect(current_path).to eq('/register')
+    expect(current_path).to eq(register_path)
     expect(page).to have_content("Username can't be blank")
 
     # no email
@@ -52,7 +53,7 @@ RSpec.describe 'User registration' do
 
     click_on 'Create User'
 
-    expect(current_path).to eq('/register')
+    expect(current_path).to eq(register_path)
     expect(page).to have_content("Email can't be blank")
 
     # no password
@@ -62,7 +63,7 @@ RSpec.describe 'User registration' do
 
     click_on 'Create User'
 
-    expect(current_path).to eq('/register')
+    expect(current_path).to eq(register_path)
     expect(page).to have_content("Password can't be blank")
 
     # no confirmation
@@ -72,7 +73,7 @@ RSpec.describe 'User registration' do
 
     click_on 'Create User'
 
-    expect(current_path).to eq('/register')
+    expect(current_path).to eq(register_path)
     expect(page).to have_content("Password confirmation can't be blank, Password confirmation doesn't match Password")
 
     # different password/confirmation
@@ -83,7 +84,7 @@ RSpec.describe 'User registration' do
 
     click_on 'Create User'
 
-    expect(current_path).to eq('/register')
+    expect(current_path).to eq(register_path)
     expect(page).to have_content("Password confirmation doesn't match Password")
   end
 end
